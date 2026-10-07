@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "fullstack",
+  "description": "Aplicações com interface, serviços e persistência.",
+  "agents": [
+    "orchestrator",
+    "architect",
+    "frontend",
+    "backend",
+    "data",
+    "reviewer",
+    "qa",
+    "security",
+    "devops"
+  ],
+  "skills": [
+    "global-project-discovery",
+    "global-task-planning",
+    "global-debugging",
+    "global-testing",
+    "global-code-review",
+    "global-feature-delivery",
+    "global-library-maintenance",
+    "global-web-interface",
+    "global-api-contracts",
+    "global-data-migrations",
+    "global-release-preparation",
+    "global-persistent-memory",
+    "global-requirements",
+    "global-architecture",
+    "global-performance",
+    "global-security-assessment",
+    "global-query-optimization",
+    "global-incident-triage"
+  ],
+  "rules": [
+    "engineering",
+    "quality",
+    "permissions",
+    "web",
+    "api",
+    "data"
+  ],
+  "conditionalRules": [
+    "typescript",
+    "python"
+  ],
+  "maxConcurrentSpecialists": 3
+}

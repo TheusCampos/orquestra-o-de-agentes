@@ -1,0 +1,162 @@
+[
+  {
+    "id": "global-project-discovery",
+    "name": "global-project-discovery",
+    "path": "skills/core/global-project-discovery",
+    "description": "Examinar um projeto desconhecido antes de planejar ou alterar código.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-task-planning",
+    "name": "global-task-planning",
+    "path": "skills/core/global-task-planning",
+    "description": "Dividir solicitações de desenvolvimento com múltiplas etapas ou dependências em tarefas verificáveis.",
+    "origin": "local",
+    "version": "0.3.0"
+  },
+  {
+    "id": "global-debugging",
+    "name": "global-debugging",
+    "path": "skills/core/global-debugging",
+    "description": "Reproduzir e corrigir um defeito relatado ou uma falha observada em software.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-testing",
+    "name": "global-testing",
+    "path": "skills/core/global-testing",
+    "description": "Escolher e executar validações proporcionais a mudanças de comportamento, contratos ou integrações.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-code-review",
+    "name": "global-code-review",
+    "path": "skills/core/global-code-review",
+    "description": "Revisar um diff ou conjunto de mudanças para encontrar defeitos, regressões e lacunas materiais.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-feature-delivery",
+    "name": "global-feature-delivery",
+    "path": "skills/core/global-feature-delivery",
+    "description": "Implementar uma funcionalidade solicitada do contrato até sua validação no projeto existente.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-library-maintenance",
+    "name": "global-library-maintenance",
+    "path": "skills/core/global-library-maintenance",
+    "description": "Criar ou atualizar agentes, skills, regras e perfis desta biblioteca reutilizável.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-web-interface",
+    "name": "global-web-interface",
+    "path": "skills/web/global-web-interface",
+    "description": "Construir ou refinar sites e interfaces web com direção visual, interação, movimento acessível e validação no navegador.",
+    "origin": "local",
+    "version": "0.3.0"
+  },
+  {
+    "id": "global-api-contracts",
+    "name": "global-api-contracts",
+    "path": "skills/backend/global-api-contracts",
+    "description": "Projetar ou alterar contratos de APIs e suas regras de validação e autorização.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-data-migrations",
+    "name": "global-data-migrations",
+    "path": "skills/data/global-data-migrations",
+    "description": "Preparar mudanças de esquema e migrações de dados compatíveis com a aplicação.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-release-preparation",
+    "name": "global-release-preparation",
+    "path": "skills/infrastructure/global-release-preparation",
+    "description": "Preparar uma versão para publicação com build, configuração e estratégia de recuperação.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-persistent-memory",
+    "name": "global-persistent-memory",
+    "path": "skills/core/global-persistent-memory",
+    "description": "Recuperar contexto, registrar decisões e checkpoints e corrigir memórias em BRAIN.md e no histórico do projeto.",
+    "origin": "local",
+    "version": "0.3.0"
+  },
+  {
+    "id": "global-requirements",
+    "name": "global-requirements",
+    "path": "skills/core/global-requirements",
+    "description": "Traduzir pedidos de funcionalidades ou projetos em critérios observáveis e decisões de escopo.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-architecture",
+    "name": "global-architecture",
+    "path": "skills/core/global-architecture",
+    "description": "Definir limites, contratos e evolução em mudanças estruturais ou decisões técnicas de projeto.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-performance",
+    "name": "global-performance",
+    "path": "skills/core/global-performance",
+    "description": "Investigar e reduzir lentidão demonstrada em interface, serviço ou processamento.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-security-assessment",
+    "name": "global-security-assessment",
+    "path": "skills/core/global-security-assessment",
+    "description": "Avaliar fronteiras de confiança, controles e vulnerabilidades no escopo autorizado de uma aplicação.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-query-optimization",
+    "name": "global-query-optimization",
+    "path": "skills/data/global-query-optimization",
+    "description": "Investigar consultas lentas e propor índices ou mudanças de acesso a dados com evidência.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-incident-triage",
+    "name": "global-incident-triage",
+    "path": "skills/infrastructure/global-incident-triage",
+    "description": "Diagnosticar falhas de build, ambiente, release ou serviço no escopo operacional autorizado.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-mobile-delivery",
+    "name": "global-mobile-delivery",
+    "path": "skills/platform/global-mobile-delivery",
+    "description": "Implementar ou validar funcionalidades mobile respeitando plataforma, ciclo de vida e ferramentas disponíveis.",
+    "origin": "local",
+    "version": "0.2.0"
+  },
+  {
+    "id": "global-desktop-delivery",
+    "name": "global-desktop-delivery",
+    "path": "skills/platform/global-desktop-delivery",
+    "description": "Implementar funcionalidades desktop com atenção à fronteira entre interface, sistema de arquivos e processos.",
+    "origin": "local",
+    "version": "0.2.0"
+  }
+]

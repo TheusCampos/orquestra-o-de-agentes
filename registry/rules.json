@@ -1,0 +1,50 @@
+[
+  {
+    "id": "engineering",
+    "path": "rules/core/engineering.md",
+    "description": "Princípios de implementação e preservação do projeto.",
+    "activation": "profile"
+  },
+  {
+    "id": "quality",
+    "path": "rules/core/quality.md",
+    "description": "Critérios de qualidade e conclusão.",
+    "activation": "profile"
+  },
+  {
+    "id": "permissions",
+    "path": "rules/execution/permissions.md",
+    "description": "Limites de execução e uso de ferramentas.",
+    "activation": "profile"
+  },
+  {
+    "id": "web",
+    "path": "rules/frameworks/web.md",
+    "description": "Regras de interfaces web, aplicáveis a sites e aplicações web.",
+    "activation": "profile"
+  },
+  {
+    "id": "api",
+    "path": "rules/frameworks/api.md",
+    "description": "Regras de contratos HTTP e serviços.",
+    "activation": "profile"
+  },
+  {
+    "id": "data",
+    "path": "rules/frameworks/data.md",
+    "description": "Integridade, consultas e evolução de dados.",
+    "activation": "profile"
+  },
+  {
+    "id": "typescript",
+    "path": "rules/languages/typescript.md",
+    "description": "Regras condicionais para projetos TypeScript.",
+    "activation": "stack:typescript"
+  },
+  {
+    "id": "python",
+    "path": "rules/languages/python.md",
+    "description": "Regras condicionais para projetos Python.",
+    "activation": "stack:python"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-06",
+  "sources": [
+    {
+      "id": "openai",
+      "url": "https://github.com/openai/skills",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    },
+    {
+      "id": "anthropic",
+      "url": "https://github.com/anthropics/skills",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    },
+    {
+      "id": "vercel",
+      "url": "https://github.com/vercel-labs/agent-skills",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    },
+    {
+      "id": "superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    },
+    {
+      "id": "supabase",
+      "url": "https://github.com/supabase/agent-skills",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    },
+    {
+      "id": "expo",
+      "url": "https://github.com/expo/skills",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    },
+    {
+      "id": "hashicorp",
+      "url": "https://github.com/hashicorp/agent-skills",
+      "status": "catalog-only",
+      "revision": null,
+      "license": null
+    }
+  ],
+  "installedExternalSkills": []
+}

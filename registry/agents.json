@@ -1,0 +1,168 @@
+[
+  {
+    "id": "orchestrator",
+    "name": "global-orchestrator",
+    "path": "agents/orchestrator.md",
+    "description": "Transformar pedidos em entregas verificáveis, coordenando especialistas, contexto, dependências e memória persistente. Ativar: É o ponto de entrada de qualquer pedido de desenvolvimento. Assume implementação direta em tarefas pequenas e coordenação em mudanças que cruzam áreas.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-persistent-memory",
+      "global-requirements",
+      "global-project-discovery",
+      "global-task-planning",
+      "global-library-maintenance"
+    ],
+    "externalReferences": [
+      "superpowers",
+      "openai"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "architect",
+    "name": "global-architect",
+    "path": "agents/architect.md",
+    "description": "Definir limites, contratos e decisões que permitam implementar e evoluir o sistema sem complexidade desnecessária. Ativar: Projeto novo com decisões abertas, mudança de arquitetura, integração entre módulos, requisito operacional relevante ou alteração incompatível. Pode ser dispensado em correções locais.",
+    "sandbox": "read-only",
+    "preferredSkills": [
+      "global-architecture",
+      "global-requirements",
+      "global-api-contracts"
+    ],
+    "externalReferences": [
+      "superpowers",
+      "openai"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "developer",
+    "name": "global-developer",
+    "path": "agents/developer.md",
+    "description": "Entregar mudanças funcionais no fluxo real do projeto, preservando contratos, alterações existentes e comportamento fora do escopo. Ativar: Funcionalidade geral, correção, automação ou refatoração. Em mobile/desktop, carrega a skill de plataforma pertinente e verifica limites reais das ferramentas.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-feature-delivery",
+      "global-debugging",
+      "global-testing"
+    ],
+    "externalReferences": [
+      "superpowers",
+      "expo"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "frontend",
+    "name": "global-frontend",
+    "path": "agents/frontend.md",
+    "description": "Construir interfaces com identidade visual, interação e movimento acessível, conectadas aos contratos do produto e verificadas no navegador. Ativar: Páginas, redesign, componentes, formulários, navegação ou qualidade visual e de interação.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-web-interface",
+      "global-performance",
+      "global-testing"
+    ],
+    "externalReferences": [
+      "anthropic-design",
+      "vercel-react",
+      "anthropic-testing"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "backend",
+    "name": "global-backend",
+    "path": "agents/backend.md",
+    "description": "Implementar regras de negócio e contratos de serviço corretos, observáveis e compatíveis com os consumidores. Ativar: APIs, autenticação/autorização, integrações, jobs, transações e regras de domínio no servidor.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-api-contracts",
+      "global-security-assessment",
+      "global-performance"
+    ],
+    "externalReferences": [
+      "openai-security",
+      "superpowers"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "data",
+    "name": "global-data",
+    "path": "agents/data.md",
+    "description": "Garantir integridade, evolução segura de esquema e consultas adequadas ao comportamento e ao volume conhecido. Ativar: Modelagem, migração, query lenta, integridade, transação, backfill ou comportamento de concorrência no banco.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-data-migrations",
+      "global-query-optimization"
+    ],
+    "externalReferences": [
+      "supabase-postgres"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "reviewer",
+    "name": "global-reviewer",
+    "path": "agents/reviewer.md",
+    "description": "Encontrar defeitos materiais no conjunto final de mudanças, com evidência que ajude o responsável a agir. Ativar: Revisão solicitada, alteração de contrato, mudança com risco relevante ou avaliação independente após integração.",
+    "sandbox": "read-only",
+    "preferredSkills": [
+      "global-code-review",
+      "global-testing"
+    ],
+    "externalReferences": [
+      "superpowers",
+      "openai-security"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "qa",
+    "name": "global-qa",
+    "path": "agents/qa.md",
+    "description": "Transformar critérios de aceitação em evidências reproduzíveis sobre o comportamento integrado. Ativar: Validação de funcionalidade, regressão, integração, teste de fluxos e investigação de teste instável.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-testing",
+      "global-debugging"
+    ],
+    "externalReferences": [
+      "anthropic-testing",
+      "superpowers"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "security",
+    "name": "global-security",
+    "path": "agents/security.md",
+    "description": "Avaliar riscos concretos nas fronteiras de confiança e propor mitigação proporcional ao produto e à mudança. Ativar: Revisão de segurança solicitada ou alteração material em autenticação, permissões, processamento de entrada, segredos ou dados sensíveis.",
+    "sandbox": "read-only",
+    "preferredSkills": [
+      "global-security-assessment",
+      "global-code-review"
+    ],
+    "externalReferences": [
+      "openai-security"
+    ],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "devops",
+    "name": "global-devops",
+    "path": "agents/devops.md",
+    "description": "Preparar ambientes e releases reproduzíveis, com diagnóstico e recuperação adequados ao destino autorizado. Ativar: CI/CD, build, infraestrutura, ambiente, release ou investigação operacional no escopo autorizado.",
+    "sandbox": "workspace-write",
+    "preferredSkills": [
+      "global-release-preparation",
+      "global-incident-triage"
+    ],
+    "externalReferences": [
+      "hashicorp",
+      "expo"
+    ],
+    "protocol": "agents/protocol.md"
+  }
+]

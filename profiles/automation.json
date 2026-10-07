@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "automation",
+  "description": "Scripts, integrações e rotinas automatizadas.",
+  "agents": [
+    "orchestrator",
+    "developer",
+    "reviewer",
+    "qa"
+  ],
+  "skills": [
+    "global-project-discovery",
+    "global-task-planning",
+    "global-debugging",
+    "global-testing",
+    "global-code-review",
+    "global-feature-delivery",
+    "global-library-maintenance",
+    "global-persistent-memory",
+    "global-requirements"
+  ],
+  "rules": [
+    "engineering",
+    "quality",
+    "permissions"
+  ],
+  "conditionalRules": [
+    "typescript",
+    "python"
+  ],
+  "maxConcurrentSpecialists": 3
+}

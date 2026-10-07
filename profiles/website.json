@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "website",
+  "description": "Sites e interfaces web.",
+  "agents": [
+    "orchestrator",
+    "frontend",
+    "developer",
+    "reviewer",
+    "qa"
+  ],
+  "skills": [
+    "global-project-discovery",
+    "global-task-planning",
+    "global-debugging",
+    "global-testing",
+    "global-code-review",
+    "global-feature-delivery",
+    "global-library-maintenance",
+    "global-web-interface",
+    "global-persistent-memory",
+    "global-requirements",
+    "global-performance"
+  ],
+  "rules": [
+    "engineering",
+    "quality",
+    "permissions",
+    "web"
+  ],
+  "conditionalRules": [
+    "typescript",
+    "python"
+  ],
+  "maxConcurrentSpecialists": 3
+}

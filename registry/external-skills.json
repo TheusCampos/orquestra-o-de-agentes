@@ -1,0 +1,119 @@
+[
+  {
+    "id": "openai",
+    "url": "https://github.com/openai/skills",
+    "agents": [
+      "orchestrator",
+      "architect"
+    ],
+    "scope": "Catálogo Codex e procedimentos de desenvolvimento; selecionar skill concreta antes de importar.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "superpowers",
+    "url": "https://github.com/obra/superpowers",
+    "agents": [
+      "orchestrator",
+      "architect",
+      "developer",
+      "reviewer",
+      "qa"
+    ],
+    "scope": "Planejamento, depuração e revisão. Regras rígidas do pacote precisam ser avaliadas antes de adoção; não foram incorporadas automaticamente.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "anthropic-design",
+    "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+    "agents": [
+      "frontend"
+    ],
+    "scope": "Direção visual para interfaces; avaliar compatibilidade com referências e decisões do usuário.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "anthropic-testing",
+    "url": "https://github.com/anthropics/skills/tree/main/skills/webapp-testing",
+    "agents": [
+      "qa",
+      "frontend"
+    ],
+    "scope": "Automação de testes web; verificar Python/Playwright e política do ambiente antes de instalar.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "vercel-react",
+    "url": "https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices",
+    "agents": [
+      "frontend"
+    ],
+    "scope": "Desempenho React/Next.js; aplicar somente em stacks compatíveis.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "supabase-postgres",
+    "url": "https://github.com/supabase/agent-skills",
+    "agents": [
+      "data"
+    ],
+    "scope": "Consultas, índices e recursos Postgres/Supabase; confirmar banco e funcionalidades utilizadas.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "openai-security",
+    "url": "https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model",
+    "agents": [
+      "security",
+      "backend",
+      "reviewer"
+    ],
+    "scope": "Modelo de ameaças com limites e evidências; não equivale a auditoria concluída.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "expo",
+    "url": "https://github.com/expo/skills",
+    "agents": [
+      "developer",
+      "devops"
+    ],
+    "scope": "Apps Expo e serviços EAS; não atende automaticamente todo framework mobile.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  },
+  {
+    "id": "hashicorp",
+    "url": "https://github.com/hashicorp/agent-skills",
+    "agents": [
+      "devops"
+    ],
+    "scope": "Terraform/Packer; selecionar produto e skill adequada. Apply continua sujeito à autorização do destino.",
+    "status": "catalog-only",
+    "checkedAt": "2026-10-06",
+    "revision": null,
+    "license": null
+  }
+]

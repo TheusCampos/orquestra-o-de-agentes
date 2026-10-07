@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "api",
+  "description": "APIs e serviços.",
+  "agents": [
+    "orchestrator",
+    "backend",
+    "data",
+    "reviewer",
+    "qa",
+    "security"
+  ],
+  "skills": [
+    "global-project-discovery",
+    "global-task-planning",
+    "global-debugging",
+    "global-testing",
+    "global-code-review",
+    "global-feature-delivery",
+    "global-library-maintenance",
+    "global-api-contracts",
+    "global-data-migrations",
+    "global-persistent-memory",
+    "global-requirements",
+    "global-security-assessment",
+    "global-performance",
+    "global-query-optimization"
+  ],
+  "rules": [
+    "engineering",
+    "quality",
+    "permissions",
+    "api",
+    "data"
+  ],
+  "conditionalRules": [
+    "typescript",
+    "python"
+  ],
+  "maxConcurrentSpecialists": 3
+}
