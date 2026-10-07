@@ -1,0 +1,10 @@
+.work/
+.agent-library/backups/
+*.log
+.env
+.env.*
+!.env.example
+
+memory/.writer.lock
+memory/BRAIN.previous.md
+memory/*.tmp
