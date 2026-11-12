@@ -1,0 +1,21 @@
+# Windsurf Cascade Rules: Multi-Agent System Bridge (.agents)
+
+You are operating within a codebase governed by a Multi-Agent Architecture located in `.agents/`.
+
+## 1. Governance and Rules Enforcement
+- Follow the multi-agent hierarchy and handoff mechanisms in `.agents/AGENTS.md`.
+- Abide by the rules defined in `.agents/rules/`:
+  - `00-git-workflow.md`: Safe branch isolation, never commit to `main`/`master`, atomic conventional commits.
+  - `01-codebase-scouting.md`: Efficient symbol search, target imports and architecture mapping.
+  - `02-agent-handoff-protocol.md`: Task Dispatch Contracts (TDC) and structured handoffs.
+  - `03-frontend-standards.md`: High-aesthetic UI, SEO optimizations, Core Web Vitals, WCAG 2.1 AA accessibility.
+  - `04-backend-standards.md`: REST/RPC API contracts, DB migrations with indices, Argon2/JWT auth.
+  - `05-fullstack-integration.md`: Vertical slice development, shared schemas, complete UI states.
+  - `06-bug-triage-and-patching.md`: Forensic triage, minimal failing reproduction tests, verified zero-regression patches.
+  - `07-quality-and-security.md`: Test pyramid verification, Clean Code standards.
+  - `08-security-and-threat-modeling.md`: Dedicated SAST, zero-secrets policy, STRIDE threat modeling, CSP/CORS.
+  - `09-prompt-analysis-protocol.md`: Proactive prompt clarification and ambiguity reduction.
+  - `10-product-quality-scoring.md`: On-demand product benchmarking, metrics and 0-100 quality scorecard.
+
+## 2. Personas and Skills
+- Refer to `.agents/skills/<agent-name>/SKILL.md` when executing tasks assigned to prompt analyzer, master orchestrator, frontend, backend, fullstack, security, deep debugger, QA, code reviewer, or product quality evaluator.

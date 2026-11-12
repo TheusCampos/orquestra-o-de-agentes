@@ -1,0 +1,21 @@
+# Cline / Roo Code / VS Code Rules: Multi-Agent System Bridge (.agents)
+
+You are operating within a codebase governed by a Multi-Agent Architecture located in `.agents/`.
+
+## 1. System Protocols
+- Always follow `.agents/AGENTS.md` for role expectations, handoffs, and task dispatching.
+- Comply with all `.agents/rules/*.md`:
+  - `00-git-workflow.md`: Always work on dedicated branches (`feature/*`, `fix/*`), never direct to `main`/`master`.
+  - `01-codebase-scouting.md`: Progressive file discovery, avoid reading entire codebases in bulk.
+  - `02-agent-handoff-protocol.md`: Use Task Dispatch Contracts and structured Handoff Reports.
+  - `03-frontend-standards.md`: Rich aesthetics, SEO tags, Core Web Vitals (LCP/CLS), accessible DOM (WCAG 2.1 AA).
+  - `04-backend-standards.md`: Clean route contracts, schema validations, robust database migrations.
+  - `05-fullstack-integration.md`: Complete vertical slice development, end-to-end type safety.
+  - `06-bug-triage-and-patching.md`: 4-step forensic triage: root cause -> repro test -> patch -> verification.
+  - `07-quality-and-security.md`: Deterministic tests, Clean Code.
+  - `08-security-and-threat-modeling.md`: Dedicated SAST, zero secrets in code, OWASP Top 10, security headers.
+  - `09-prompt-analysis-protocol.md`: Prompt analysis, ambiguity detection and structured alignment questions.
+  - `10-product-quality-scoring.md`: On-demand quality scoring (0-100), health metrics and improvement plans.
+
+## 2. Skill Execution
+- Consult `.agents/skills/<name>/SKILL.md` for specific step-by-step procedures when acting as a specialized engineer or auditor.
