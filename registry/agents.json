@@ -19,6 +19,36 @@
     "protocol": "agents/protocol.md"
   },
   {
+    "id": "ceo",
+    "name": "global-ceo",
+    "path": "agents/ceo.md",
+    "description": "Definir direção, prioridades e critérios de sucesso do produto. Ativar: estratégia, posicionamento e trade-offs de negócio entre equipes.",
+    "sandbox": "read-only",
+    "preferredSkills": ["global-requirements", "global-task-planning", "global-persistent-memory"],
+    "externalReferences": [],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "product-manager",
+    "name": "global-product-manager",
+    "path": "agents/product-manager.md",
+    "description": "Traduzir objetivos em escopo, jornada e critérios verificáveis. Ativar: produto novo, funcionalidade ampla ou requisitos ambíguos.",
+    "sandbox": "read-only",
+    "preferredSkills": ["global-requirements", "global-project-discovery", "global-task-planning"],
+    "externalReferences": [],
+    "protocol": "agents/protocol.md"
+  },
+  {
+    "id": "designer",
+    "name": "global-designer",
+    "path": "agents/designer.md",
+    "description": "Definir fluxos, hierarquia e direção visual implementável. Ativar: novo produto, redesign, identidade, protótipo e experiência complexa.",
+    "sandbox": "read-only",
+    "preferredSkills": ["global-web-interface", "global-requirements", "global-testing"],
+    "externalReferences": [],
+    "protocol": "agents/protocol.md"
+  },
+  {
     "id": "architect",
     "name": "global-architect",
     "path": "agents/architect.md",

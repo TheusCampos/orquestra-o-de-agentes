@@ -1,0 +1,21 @@
+{
+  "description": "Skills instaladas no ambiente do usuário. Roteamento por papel; disponibilidade deve ser confirmada na sessão. Não são copiadas pelo sync.",
+  "agents": {
+    "orchestrator": ["full-output-enforcement"],
+    "ceo": [],
+    "product-manager": ["prototype"],
+    "designer": ["apple-design", "brandkit", "design-taste-frontend", "emil-design-eng", "gpt-taste", "high-end-visual-design", "imagegen-frontend-mobile", "imagegen-frontend-web", "industrial-brutalist-ui", "minimalist-ui", "prototype", "redesign-existing-projects", "stitch-design-taste", "animation-vocabulary", "find-animation-opportunities", "improve-animations"],
+    "architect": ["pick-ui-library"],
+    "developer": ["animate-expo", "ask-sonner", "mobile-native", "write-swift", "full-output-enforcement"],
+    "frontend": ["animate", "animate-expo", "animation-performance", "apple-design", "ask-sonner", "break-ui", "design-taste-frontend", "emil-design-eng", "gpt-taste", "high-end-visual-design", "image-to-code", "industrial-brutalist-ui", "minimalist-ui", "mobile-native", "pick-ui-library", "prototype", "redesign-existing-projects", "review-animations", "write-swift"],
+    "backend": ["full-output-enforcement"],
+    "data": ["full-output-enforcement"],
+    "reviewer": ["break-ui", "review-animations", "write-swift"],
+    "qa": ["break-ui", "review-animations", "mobile-native"],
+    "security": [],
+    "devops": []
+  },
+  "compatibilityOnly": ["design-taste-frontend-v1", "design-taste-frontend-v2-experimental"],
+  "explicitInvocationOnly": ["pick-ui-library", "prototype"],
+  "notes": "Motion é concebido pelo designer e implementado pelo frontend ou developer mobile. Variantes legadas de design-taste só devem ser usadas para compatibilidade explícita."
+}

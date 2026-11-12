@@ -4,6 +4,7 @@
   "description": "APIs e serviços.",
   "agents": [
     "orchestrator",
+    "product-manager",
     "backend",
     "data",
     "reviewer",
@@ -24,14 +25,18 @@
     "global-requirements",
     "global-security-assessment",
     "global-performance",
-    "global-query-optimization"
+    "global-query-optimization",
+    "global-lgpd-compliance"
   ],
   "rules": [
     "engineering",
     "quality",
+    "learning",
     "permissions",
     "api",
-    "data"
+    "data",
+    "operability",
+    "lgpd"
   ],
   "conditionalRules": [
     "typescript",

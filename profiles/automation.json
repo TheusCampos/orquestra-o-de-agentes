@@ -4,6 +4,7 @@
   "description": "Scripts, integrações e rotinas automatizadas.",
   "agents": [
     "orchestrator",
+    "product-manager",
     "developer",
     "reviewer",
     "qa"
@@ -22,6 +23,7 @@
   "rules": [
     "engineering",
     "quality",
+    "learning",
     "permissions"
   ],
   "conditionalRules": [

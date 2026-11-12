@@ -26,6 +26,7 @@ Em trabalho paralelo, o orquestrador centraliza escrita. Agentes read-only retor
 - [decision-memory-design] confirmed: Usar BRAIN.md por projeto como resumo curado, memory/events.jsonl como historico e escritor central no orquestrador. Preservar memoria nas sincronizacoes e consultar contexto ao iniciar sessao.
 - [decision-site-test-local] confirmed: Teste solicitado implementado como landing page Nexo local em HTML/CSS/JS puro, sem backend ou publicacao; pasta SITE TESTE na Area de Trabalho.
 - [decision-fix-library-v030] confirmed: Exigir mapa runtime e ACK de contratos; persistir journal/resumo atomicos com recuperacao explicita; frontend orientado por briefing, motion acessivel e QA real. Preservar v1 e refazer Nexo em .work/site-teste-v2.
+- [c09d56ddfee54508af71a0466fa3b372] confirmed: Persistencia de memoria expandida para JSON estruturado (memory/events.json) e banco relacional SQLite (memory/memory.sqlite) com suporte a consultas SQL e sincronizacao automatica.
 ## Checkpoint atual
 [70364cd9cfd44ab7b0f1bd022cfebbc8] Push concluido para TheusCampos/orquestra-o-de-agentes, branch main acompanhando origin/main. Historicos independentes integrados no merge d1c3b78; conflitos em BRAIN.md e README.md resolvidos mantendo versoes locais mais recentes. Biblioteca completa incluida pelo commit preexistente b0b7621.
 ## Eventos recentes (historico completo: memory/events.jsonl)
@@ -99,4 +100,19 @@ Data UTC: 2026-10-07T13:10:55.8468053Z
 Data UTC: 2026-10-07T13:14:15.8872231Z
 > Push concluido para TheusCampos/orquestra-o-de-agentes, branch main acompanhando origin/main. Historicos independentes integrados no merge d1c3b78; conflitos em BRAIN.md e README.md resolvidos mantendo versoes locais mais recentes. Biblioteca completa incluida pelo commit preexistente b0b7621.
 > Fonte/evidencia: git push -u origin main: 9461e1a..d1c3b78 main -> main; tracking configurado; git merge preservou historico remoto sem force push.
+
+### action-ai-environment-20261014 | action | confirmed | orchestrator
+Data UTC: 2026-10-14T22:06:06.732832Z
+> Ambiente de IA ampliado com OpenAI Docs MCP, GitHub CLI, Docker Desktop com MCP plugin, pre-commit Python e CI GitHub Actions. GitHub e Atlassian permanecem aguardando autenticacao; Slack exige app OAuth proprio.
+> Fonte/evidencia: codex mcp list; pre-commit run --all-files; unittest 5 testes OK; agentlib validate OK; Docker Desktop 4.95.0 e docker mcp v0.44.1
+
+### c09d56ddfee54508af71a0466fa3b372 | decision | confirmed | orchestrator
+Data UTC: 2026-10-21T20:39:53.336136Z
+> Persistencia de memoria expandida para JSON estruturado (memory/events.json) e banco relacional SQLite (memory/memory.sqlite) com suporte a consultas SQL e sincronizacao automatica.
+> Fonte/evidencia: Solicitacao do usuario e implementacao em agentlib/memory.py
+
+### e967622a4977433b973a5bea853018f1 | action | confirmed | orchestrator
+Data UTC: 2026-10-21T20:40:08.011994Z
+> Implementadas skills global-seo e global-lgpd-compliance, regra rules/compliance/lgpd.md, e triplo armazenamento de eventos em .jsonl, .json e .sqlite com 7 testes unitarios validados.
+> Fonte/evidencia: python -m agentlib validate e python -m unittest discover -s tests passaram com 100% de sucesso.
 <!-- memory:end -->

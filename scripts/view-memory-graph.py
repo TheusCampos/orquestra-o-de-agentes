@@ -4,8 +4,9 @@ import os
 import webbrowser
 from datetime import datetime
 
-DB_PATH = 'memory/events.db'
+DB_PATH = 'memory/memory.sqlite' if os.path.exists('memory/memory.sqlite') or not os.path.exists('memory/events.db') else 'memory/events.db'
 JSONL_PATH = 'memory/events.jsonl'
+JSON_PATH = 'memory/events.json'
 HTML_PATH = 'memory/graph.html'
 
 def sync_to_sqlite():

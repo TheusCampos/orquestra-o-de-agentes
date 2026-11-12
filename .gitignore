@@ -8,3 +8,5 @@
 memory/.writer.lock
 memory/BRAIN.previous.md
 memory/*.tmp
+__pycache__/
+*.py[cod]

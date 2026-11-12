@@ -158,5 +158,77 @@
     "description": "Implementar funcionalidades desktop com atenção à fronteira entre interface, sistema de arquivos e processos.",
     "origin": "local",
     "version": "0.2.0"
+  },
+  {
+    "id": "openspec-proposal",
+    "name": "openspec-proposal",
+    "path": "skills/openspec-proposal",
+    "description": "Criar uma proposta de mudança rastreável no fluxo OpenSpec.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "openspec-apply",
+    "name": "openspec-apply",
+    "path": "skills/openspec-apply",
+    "description": "Implementar uma proposta OpenSpec aprovada com verificações proporcionais.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "openspec-archive",
+    "name": "openspec-archive",
+    "path": "skills/openspec-archive",
+    "description": "Arquivar uma mudança OpenSpec concluída e atualizar sua fonte de verdade.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "gsap-skills",
+    "name": "gsap-skills",
+    "path": "skills/web/gsap-skills",
+    "description": "Aplicar animações GSAP de forma acessível e compatível com o projeto.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "img2threejs",
+    "name": "img2threejs",
+    "path": "skills/web/img2threejs",
+    "description": "Criar experiências Three.js a partir de referências visuais quando o escopo justificar.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "impeccable",
+    "name": "impeccable",
+    "path": "skills/web/impeccable",
+    "description": "Elevar acabamento visual de interfaces web sem substituir requisitos funcionais.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "motion-design-skill",
+    "name": "motion-design-skill",
+    "path": "skills/web/motion-design-skill",
+    "description": "Projetar movimento de interface acessível, intencional e verificável.",
+    "origin": "bundled",
+    "version": "0.4.0"
+  },
+  {
+    "id": "global-seo",
+    "name": "global-seo",
+    "path": "skills/web/global-seo",
+    "description": "Otimizar páginas e aplicações web para motores de busca, visibilidade orgânica, dados estruturados (Schema.org), OpenGraph e Core Web Vitals.",
+    "origin": "local",
+    "version": "0.3.0"
+  },
+  {
+    "id": "global-lgpd-compliance",
+    "name": "global-lgpd-compliance",
+    "path": "skills/core/global-lgpd-compliance",
+    "description": "Implementar diretrizes, avisos de privacidade, consentimento de cookies e tratamento seguro de dados pessoais conforme a LGPD.",
+    "origin": "local",
+    "version": "0.3.0"
   }
 ]

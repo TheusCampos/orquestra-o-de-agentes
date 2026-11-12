@@ -4,6 +4,9 @@
   "description": "Aplicações mobile; stack definida pelo projeto.",
   "agents": [
     "orchestrator",
+    "ceo",
+    "product-manager",
+    "designer",
     "architect",
     "developer",
     "reviewer",
@@ -21,11 +24,13 @@
     "global-requirements",
     "global-architecture",
     "global-api-contracts",
-    "global-mobile-delivery"
+    "global-mobile-delivery",
+    "global-web-interface"
   ],
   "rules": [
     "engineering",
     "quality",
+    "learning",
     "permissions"
   ],
   "conditionalRules": [

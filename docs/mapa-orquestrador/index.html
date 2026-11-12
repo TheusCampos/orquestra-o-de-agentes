@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Central visual do orquestrador e dos agentes da biblioteca.">
+  <meta http-equiv="refresh" content="0; url=mapa-interativo.html">
+  <link rel="icon" href="data:,">
+  <title>Central de Orquestração</title>
+  <style>
+    :root {
+      --void: #0b1016;
+      --night: #111922;
+      --panel: #16212c;
+      --panel-deep: #0e161f;
+      --line: rgba(181, 208, 220, .14);
+      --line-strong: rgba(181, 208, 220, .25);
+      --paper: #e8f0f2;
+      --mist: #93a7ae;
+      --cyan: #5ee3d1;
+      --cyan-soft: rgba(94, 227, 209, .14);
+      --amber: #efb65b;
+      --amber-soft: rgba(239, 182, 91, .14);
+      --rose: #f27e78;
+      --blue: #8db8ff;
+      --unit: 8px;
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--void); }
+    body { margin: 0; min-width: 320px; background: var(--void); color: var(--paper); }
+    button { font: inherit; }
+
+    .shell {
+      min-height: 100vh;
+      padding: clamp(16px, 2vw, 28px);
+      background-image: radial-gradient(circle at 45% 14%, rgba(94, 227, 209, .08), transparent 30%), linear-gradient(135deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: auto, 28px 28px;
+    }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      max-width: 1600px; margin: 0 auto 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark { width: 38px; height: 38px; border: 1px solid var(--cyan); border-radius: 12px 3px 12px 3px; display: grid; place-items: center; color: var(--cyan); font-weight: 800; letter-spacing: -.07em; box-shadow: 0 0 30px rgba(94,227,209,.12); }
+    .eyebrow { margin: 0 0 3px; color: var(--mist); font-size: 11px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: 19px; letter-spacing: -.03em; font-weight: 650; }
+    .live { display: inline-flex; align-items: center; gap: 8px; color: var(--mist); font-size: 13px; }
+    .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 0 rgba(94,227,209,.5); animation: pulse 2s infinite; }
+
+    .app { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: minmax(220px, .78fr) minmax(540px, 1.9fr) minmax(275px, .9fr); gap: 14px; }
+    .panel { border: 1px solid var(--line); border-radius: 16px; background: rgba(17,25,34,.89); box-shadow: inset 0 1px rgba(255,255,255,.025), 0 18px 60px rgba(0,0,0,.18); overflow: hidden; }
+    .panel-head { display: flex; justify-content: space-between; align-items: baseline; padding: 17px 18px 13px; border-bottom: 1px solid var(--line); }
+    .panel-head h2 { margin: 0; font-size: 13px; font-weight: 650; letter-spacing: -.01em; }
+    .panel-head span { color: var(--mist); font-size: 11px; }
+
+    .roster { min-height: 670px; }
+    .agent-list { padding: 10px; display: grid; gap: 4px; }
+    .agent {
+      width: 100%; display: grid; grid-template-columns: 31px 1fr auto; gap: 10px; align-items: center; padding: 10px 8px; border: 0; border-radius: 10px; color: var(--paper); background: transparent; text-align: left; cursor: pointer; transition: background .16s ease, transform .16s ease;
+    }
+    .agent:hover, .agent:focus-visible { background: rgba(255,255,255,.055); outline: none; }
+    .agent:active { transform: scale(.985); }
+    .agent.active { background: var(--cyan-soft); }
+    .agent-symbol { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; background: rgba(255,255,255,.055); color: var(--blue); font-size: 13px; font-weight: 760; }
+    .agent.active .agent-symbol { background: rgba(94,227,209,.2); color: var(--cyan); }
+    .agent-name { display: block; font-size: 13px; font-weight: 610; }
+    .agent-role { display: block; margin-top: 2px; color: var(--mist); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .permission { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+    .permission.read { background: var(--amber); }
+    .roster-foot { margin: 8px 10px 12px; padding: 12px; border-radius: 10px; background: var(--panel-deep); color: var(--mist); font-size: 11px; line-height: 1.55; }
+    .roster-foot strong { color: var(--paper); font-weight: 620; }
+
+    .stage { position: relative; min-height: 670px; display: flex; flex-direction: column; }
+    .stage-top { display: flex; justify-content: space-between; align-items: end; padding: 20px 22px 12px; }
+    .stage-top h2 { margin: 0; max-width: 500px; font-size: clamp(21px, 2.2vw, 31px); line-height: 1.05; letter-spacing: -.055em; font-weight: 660; text-wrap: balance; }
+    .stage-top p { margin: 7px 0 0; color: var(--mist); font-size: 12px; line-height: 1.5; }
+    .profile { flex: 0 0 auto; color: var(--cyan); background: var(--cyan-soft); border: 1px solid rgba(94,227,209,.22); padding: 7px 10px; border-radius: 99px; font-size: 11px; font-weight: 650; }
+
+    .map { position: relative; flex: 1; margin: 0 14px 14px; border-radius: 12px; overflow: hidden; background: var(--panel-deep); border: 1px solid var(--line); }
+    .map::before { content: ""; position: absolute; inset: 0; opacity: .62; background-image: linear-gradient(rgba(190,220,230,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(190,220,230,.045) 1px, transparent 1px); background-size: 44px 44px; }
+    .orbit, .orbit.two { position: absolute; top: 50%; left: 50%; width: min(50vw, 430px); aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(94,227,209,.18); transform: translate(-50%, -50%); }
+    .orbit.two { width: min(36vw, 305px); border-color: rgba(141,184,255,.18); }
+    .core { position: absolute; z-index: 2; top: 50%; left: 50%; width: 172px; height: 172px; padding: 20px; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(94,227,209,.48); background: radial-gradient(circle at 35% 28%, #223841, #15242c 62%, #101a21); box-shadow: 0 0 0 14px rgba(94,227,209,.035), 0 0 80px rgba(94,227,209,.18); display: flex; flex-direction: column; justify-content: center; text-align: center; }
+    .core small { color: var(--cyan); font-size: 10px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .core strong { margin-top: 5px; font-size: 19px; line-height: 1; letter-spacing: -.05em; }
+    .core span { margin-top: 9px; color: var(--mist); font-size: 10px; line-height: 1.35; }
+    .node { position: absolute; z-index: 3; display: flex; align-items: center; gap: 8px; padding: 7px 10px 7px 7px; border: 1px solid var(--line-strong); border-radius: 10px; background: rgba(20,31,41,.92); color: var(--paper); font-size: 11px; font-weight: 600; box-shadow: 0 8px 16px rgba(0,0,0,.12); transition: border-color .16s, background .16s, transform .16s; }
+    .node:hover { border-color: var(--cyan); background: #1b2a34; transform: translateY(-2px); }
+    .node i { width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font-style: normal; color: var(--cyan); background: var(--cyan-soft); font-size: 10px; }
+    .node.read i { color: var(--amber); background: var(--amber-soft); }
+    .n-architect { top: 12%; left: 12%; } .n-frontend { top: 9%; right: 12%; } .n-backend { top: 31%; right: 4%; } .n-data { bottom: 14%; right: 12%; } .n-devops { bottom: 7%; left: 35%; } .n-security { bottom: 20%; left: 5%; } .n-qa { top: 43%; left: 2%; } .n-reviewer { top: 25%; left: 30%; } .n-developer { top: 66%; left: 27%; }
+    .map-caption { position: absolute; bottom: 14px; left: 16px; z-index: 2; margin: 0; color: var(--mist); font-size: 10px; max-width: 200px; line-height: 1.45; }
+    .link { position: absolute; z-index: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(94,227,209,.42), transparent); transform-origin: left; }
+    .l1 { width: 34%; top: 31%; left: 27%; transform: rotate(24deg); } .l2 { width: 27%; top: 34%; left: 52%; transform: rotate(-31deg); } .l3 { width: 29%; top: 56%; left: 49%; transform: rotate(35deg); } .l4 { width: 28%; top: 61%; left: 27%; transform: rotate(-40deg); } .l5 { width: 22%; top: 50%; left: 19%; transform: rotate(13deg); }
+
+    .flow { position: relative; z-index: 4; display: flex; gap: 0; padding: 0 22px 17px; overflow-x: auto; }
+    .flow-step { min-width: 108px; position: relative; padding: 10px 10px 10px 14px; border-top: 1px solid var(--line); color: var(--mist); font-size: 10px; line-height: 1.3; }
+    .flow-step::before { content: ""; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); }
+    .flow-step b { display: block; margin-bottom: 3px; color: var(--paper); font-size: 11px; font-weight: 650; }
+
+    .inspector { min-height: 670px; display: flex; flex-direction: column; }
+    .inspector-content { padding: 18px; }
+    .detail-kicker { color: var(--cyan); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 750; }
+    .detail-title { margin: 6px 0 6px; font-size: 24px; letter-spacing: -.05em; line-height: 1; }
+    .detail-copy { margin: 0; color: var(--mist); font-size: 12px; line-height: 1.55; }
+    .capabilities { display: grid; gap: 7px; margin: 18px 0; }
+    .capability { display: flex; gap: 9px; align-items: center; padding: 9px 10px; border-radius: 8px; background: var(--panel-deep); font-size: 11px; }
+    .capability span { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
+    .capability.readonly span { background: var(--amber); }
+    .section-label { margin: 21px 0 9px; color: var(--mist); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 720; }
+    .improvement { display: grid; grid-template-columns: 25px 1fr; gap: 9px; padding: 10px 0; border-top: 1px solid var(--line); }
+    .improvement:first-of-type { border-top: 0; }
+    .improvement b { display: block; font-size: 11px; font-weight: 650; }
+    .improvement p { margin: 3px 0 0; color: var(--mist); font-size: 10px; line-height: 1.45; }
+    .check { width: 20px; height: 20px; display: grid; place-items: center; color: var(--cyan); background: var(--cyan-soft); border-radius: 50%; font-size: 11px; }
+    .status { margin-top: auto; padding: 14px 18px; border-top: 1px solid var(--line); background: rgba(0,0,0,.1); }
+    .status-row { display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+    .status-row + .status-row { margin-top: 10px; color: var(--mist); }
+    .status b { color: var(--paper); font-weight: 620; }
+    .bar { width: 86px; height: 5px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.09); }
+    .bar i { display: block; width: 70%; height: 100%; border-radius: inherit; background: var(--cyan); }
+
+    @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(94,227,209,0); } 100% { box-shadow: 0 0 0 0 rgba(94,227,209,0); } }
+    @media (max-width: 1100px) { .app { grid-template-columns: 250px 1fr; } .inspector { grid-column: 1 / -1; min-height: unset; } .inspector-content { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; } .inspector-content > .section-label { grid-column: 2; margin-bottom: -12px; } .inspector-content > .improvement { grid-column: 2; margin-top: -12px; } }
+    @media (max-width: 760px) { .shell { padding: 12px; } .topbar { align-items: flex-start; } .live { font-size: 10px; } .app { grid-template-columns: 1fr; } .roster, .stage { min-height: unset; } .agent-list { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .agent { min-width: 0; grid-template-columns: 31px minmax(0, 1fr) auto; } .agent-name, .agent-role { overflow: hidden; text-overflow: ellipsis; } .roster-foot { display: none; } .map { height: 480px; } .n-architect { left: 4%; } .n-frontend { right: 3%; } .n-backend { right: 1%; } .n-data { right: 3%; bottom: 15%; } .n-security { left: 1%; } .n-qa { left: 1%; } .n-reviewer { display: none; } .n-developer { left: 19%; } .n-devops { left: 35%; } .node { padding-right: 6px; font-size: 9px; } .node i { width: 17px; height: 17px; } .inspector-content { display: block; } .inspector { grid-column: auto; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A/</div>
+        <div><p class="eyebrow">Biblioteca global · v0.4</p><h1>Central de Orquestração</h1></div>
+      </div>
+      <div class="live"><span class="pulse"></span> Catálogo validado · 10 papéis · 29 skills</div>
+    </header>
+
+    <section class="app" aria-label="Visão geral da orquestração">
+      <aside class="panel roster" aria-label="Lista de agentes">
+        <div class="panel-head"><h2>Equipe disponível</h2><span>clique para inspecionar</span></div>
+        <div class="agent-list" id="agentList"></div>
+        <p class="roster-foot"><strong>Leitura correta:</strong> estes são papéis instaláveis, não processos sempre ativos. O runtime cria especialistas apenas quando a tarefa e as ferramentas justificam.</p>
+      </aside>
+
+      <section class="panel stage" aria-label="Mapa de coordenação">
+        <div class="stage-top"><div><p class="eyebrow">Visão de execução</p><h2>Um núcleo coordena; especialistas entram por necessidade.</h2><p>Perfil fullstack · máximo de 3 especialistas em paralelo</p></div><span class="profile">perfil: fullstack</span></div>
+        <div class="map" aria-label="Orquestrador no centro conectado a especialistas">
+          <div class="orbit"></div><div class="orbit two"></div>
+          <span class="link l1"></span><span class="link l2"></span><span class="link l3"></span><span class="link l4"></span><span class="link l5"></span>
+          <div class="core"><small>ponto de entrada</small><strong>ORQUESTRADOR</strong><span>recupera contexto · roteia · integra · registra</span></div>
+          <div class="node read n-architect"><i>Ar</i>Arquitetura</div><div class="node n-frontend"><i>Fe</i>Frontend</div><div class="node n-backend"><i>Be</i>Backend</div><div class="node n-data"><i>Da</i>Dados</div><div class="node n-devops"><i>Do</i>DevOps</div><div class="node read n-security"><i>Se</i>Segurança</div><div class="node n-qa"><i>Qa</i>QA</div><div class="node read n-reviewer"><i>Re</i>Revisão</div><div class="node n-developer"><i>De</i>Developer</div>
+          <p class="map-caption">Linhas indicam coordenação lógica, não agentes ativos nesta tela.</p>
+        </div>
+        <div class="flow" aria-label="Etapas do fluxo"><div class="flow-step"><b>01 · Recuperar</b>memória e projeto</div><div class="flow-step"><b>02 · Contratar</b>critério e escopo</div><div class="flow-step"><b>03 · Delegar</b>ownership e ACK</div><div class="flow-step"><b>04 · Integrar</b>evidência e revisão</div><div class="flow-step"><b>05 · Persistir</b>decisão e checkpoint</div></div>
+      </section>
+
+      <aside class="panel inspector" aria-live="polite">
+        <div class="panel-head"><h2>Inspector de papel</h2><span id="permissionLabel">escrita</span></div>
+        <div class="inspector-content">
+          <div><div class="detail-kicker" id="detailKicker">Papel central</div><h2 class="detail-title" id="detailTitle">Orquestrador</h2><p class="detail-copy" id="detailCopy">Transforma pedidos em entregas verificáveis e conserva a continuidade entre sessões.</p><div class="capabilities" id="capabilities"></div></div>
+          <div class="section-label">Melhorias aplicadas</div>
+          <div class="improvement"><span class="check">✓</span><div><b>Ownership por caminho</b><p>Um único escritor por arquivo, reduzindo colisões em trabalho paralelo.</p></div></div>
+          <div class="improvement"><span class="check">✓</span><div><b>ACK e contratos versionados</b><p>Dependências não avançam por silêncio; consumidor aceita a versão proposta.</p></div></div>
+          <div class="improvement"><span class="check">✓</span><div><b>Memória em três formatos</b><p>Resumo em BRAIN, journal JSONL e consultas estruturadas em JSON/SQLite.</p></div></div>
+        </div>
+        <footer class="status"><div class="status-row"><b>Estado da raiz</b><span style="color:var(--amber)">sem tarefas ativas</span></div><div class="status-row"><span>Capacidade paralela</span><span class="bar" aria-label="3 especialistas máximos"><i></i></span></div></footer>
+      </aside>
+    </section>
+  </main>
+  <script>
+    const agents = [
+      {id:'orchestrator', symbol:'Or', name:'Orquestrador', role:'coordenação e continuidade', permission:'escrita', type:'Papel central', copy:'Transforma pedidos em entregas verificáveis. Recupera contexto, define contratos, seleciona especialistas, integra evidências e registra o checkpoint.', caps:['Roteamento por perfil e tarefa','Integração e validação final','Único escritor de memória no paralelo']},
+      {id:'architect', symbol:'Ar', name:'Arquitetura', role:'limites e decisões', permission:'somente leitura', type:'Especialista read-only', copy:'Entra quando há fronteiras novas, mudança incompatível ou decisão estrutural. Define contratos antes da implementação.', caps:['Arquitetura e requisitos','Contratos de integração','Sem escrita no workspace']},
+      {id:'developer', symbol:'De', name:'Developer', role:'mudança funcional geral', permission:'escrita', type:'Especialista de entrega', copy:'Implementa correções, funcionalidades gerais, automações e refatorações preservando o comportamento fora de escopo.', caps:['Feature delivery','Debugging e testes','Mobile e desktop quando aplicável']},
+      {id:'frontend', symbol:'Fe', name:'Frontend', role:'interface e interação', permission:'escrita', type:'Especialista de interface', copy:'Constrói páginas, componentes e fluxos de interface conectados aos contratos do produto e testados no navegador.', caps:['Web interface','Acessibilidade e performance','Verificação visual']},
+      {id:'backend', symbol:'Be', name:'Backend', role:'serviços e domínio', permission:'escrita', type:'Especialista de serviço', copy:'Implementa APIs, regras de domínio, integrações e transações com contratos observáveis e compatíveis.', caps:['API contracts','Segurança de serviço','Performance']},
+      {id:'data', symbol:'Da', name:'Dados', role:'persistência e integridade', permission:'escrita', type:'Especialista de dados', copy:'Cuida de modelagem, migrações, consultas, integridade e concorrência no banco.', caps:['Migrações seguras','Otimização de query','Backfill e consistência']},
+      {id:'qa', symbol:'Qa', name:'QA', role:'evidência integrada', permission:'escrita', type:'Especialista de validação', copy:'Converte critérios de aceitação em evidência reproduzível de comportamento, regressão e integração.', caps:['Fluxos integrados','Regressão','Diagnóstico de testes instáveis']},
+      {id:'reviewer', symbol:'Re', name:'Revisão', role:'avaliação independente', permission:'somente leitura', type:'Especialista read-only', copy:'Encontra defeitos materiais após a integração, com evidências acionáveis para o responsável.', caps:['Code review','Avaliação independente','Sem escrita no workspace']},
+      {id:'security', symbol:'Se', name:'Segurança', role:'fronteiras de confiança', permission:'somente leitura', type:'Especialista read-only', copy:'Avalia riscos em autenticação, permissões, entradas, segredos e dados sensíveis, propondo mitigação proporcional.', caps:['Security assessment','Revisão de fronteiras','Sem escrita no workspace']},
+      {id:'devops', symbol:'Do', name:'DevOps', role:'ambiente e release', permission:'escrita', type:'Especialista operacional', copy:'Prepara CI/CD, builds, ambientes e releases reproduzíveis dentro do escopo autorizado.', caps:['Release preparation','Incidentes','Infraestrutura e ambiente']}
+    ];
+    const list = document.querySelector('#agentList');
+    const setDetail = agent => {
+      document.querySelector('#detailKicker').textContent = agent.type;
+      document.querySelector('#detailTitle').textContent = agent.name;
+      document.querySelector('#detailCopy').textContent = agent.copy;
+      document.querySelector('#permissionLabel').textContent = agent.permission;
+      document.querySelector('#capabilities').innerHTML = agent.caps.map(cap => `<div class="capability ${agent.permission === 'somente leitura' ? 'readonly' : ''}"><span></span>${cap}</div>`).join('');
+      document.querySelectorAll('.agent').forEach(el => el.classList.toggle('active', el.dataset.id === agent.id));
+    };
+    agents.forEach(agent => {
+      const button = document.createElement('button'); button.className = 'agent'; button.dataset.id = agent.id;
+      button.innerHTML = `<span class="agent-symbol">${agent.symbol}</span><span><span class="agent-name">${agent.name}</span><span class="agent-role">${agent.role}</span></span><span class="permission ${agent.permission === 'somente leitura' ? 'read' : ''}" title="${agent.permission}"></span>`;
+      button.addEventListener('click', () => setDetail(agent)); list.appendChild(button);
+    });
+    setDetail(agents[0]);
+  </script>
+</body>
+</html>

@@ -48,7 +48,7 @@ def parse_frontmatter(text: str) -> dict:
     body = match.group(1)
     result = {}
     name = re.search(r"(?m)^name:\s*([a-z0-9-]+)\s*$", body)
-    description = re.search(r"(?m)^description:\s*(\S[^\r\n]*)$", body)
+    description = re.search(r"(?m)^description:[ \t]*(\S[^\r\n]*?)\r?$", body)
     if name:
         result["name"] = name.group(1)
     if description:
@@ -168,6 +168,21 @@ def validate(root: Path = LIBRARY_ROOT) -> str:
     for source in sources.get("sources", []):
         check(source.get("status") == "catalog-only", f"Fonte externa promovida sem validador de importacao: {source.get('id')}")
     check(not sources.get("installedExternalSkills"), "Importacoes externas ainda nao suportadas pelo validador.")
+
+    routing_file = root / "registry/workspace-skill-routing.json"
+    if routing_file.is_file():
+        routing = read_json(routing_file)
+        mapping = routing.get("agents", {})
+        agent_ids = {agent.get("id") for agent in agents}
+        check(isinstance(mapping, dict), "Roteamento de skills locais deve ser objeto.")
+        if isinstance(mapping, dict):
+            for role, names_for_role in mapping.items():
+                check(role in agent_ids, f"Roteamento para agente inexistente: {role}")
+                check(isinstance(names_for_role, list), f"Skills locais de {role} devem ser lista.")
+                if isinstance(names_for_role, list):
+                    check(len(names_for_role) == len(set(names_for_role)), f"Skills locais duplicadas para {role}")
+            for name in routing.get("compatibilityOnly", []) + routing.get("explicitInvocationOnly", []):
+                check(isinstance(name, str) and bool(SKILL_NAME.match(name)), f"Nome de skill local invalido: {name}")
 
     # Texto corrompido (U+FFFD) costuma vir de arquivo salvo em ANSI e lido como UTF-8.
     for folder in ("agents", "skills", "rules", "workflows", "templates"):

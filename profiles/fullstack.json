@@ -4,6 +4,9 @@
   "description": "Aplicações com interface, serviços e persistência.",
   "agents": [
     "orchestrator",
+    "ceo",
+    "product-manager",
+    "designer",
     "architect",
     "frontend",
     "backend",
@@ -31,15 +34,20 @@
     "global-performance",
     "global-security-assessment",
     "global-query-optimization",
-    "global-incident-triage"
+    "global-incident-triage",
+    "global-seo",
+    "global-lgpd-compliance"
   ],
   "rules": [
     "engineering",
     "quality",
+    "learning",
     "permissions",
     "web",
     "api",
-    "data"
+    "data",
+    "operability",
+    "lgpd"
   ],
   "conditionalRules": [
     "typescript",

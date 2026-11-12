@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Dict, Optional, Tuple
 
 from .core import (
-    LIBRARY_ROOT, AgentLibError, assert_no_links, byte_hash, dump_json,
+    LIBRARY_ROOT, AgentLibError, FileLock, assert_no_links, byte_hash, dump_json,
     file_hash, read_json, read_text, resolve_child, text_hash, write_atomic
 )
 from .catalog import load_profile, load_catalog, select, validate
@@ -20,7 +20,7 @@ def _add_source(desired: Dict[str, str], relative: str) -> None:
     if path.is_file():
         desired[f".agent-library/{relative}"] = read_text(path)
 
-def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int, str]:
+def _sync_project_unlocked(project_path: str, profile_name: str = "general") -> Tuple[int, str]:
     """Sincroniza um projeto com o perfil escolhido da biblioteca.
     
     Retorna uma tupla (numero_arquivos_alterados, mensagem).
@@ -68,10 +68,10 @@ def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int,
         if (LIBRARY_ROOT / "scripts" / script_name).is_file():
             _add_source(desired, f"scripts/{script_name}")
             
-    # Arquivos core Python
-    for py_module in ["core.py", "catalog.py", "memory.py", "sync.py"]:
-        if (LIBRARY_ROOT / "agentlib" / py_module).is_file():
-            _add_source(desired, f"agentlib/{py_module}")
+    # Copiar todos os módulos-fonte; uma lista fixa ficaria desatualizada quando
+    # um mecanismo novo (por exemplo, tasks.py) fosse adicionado.
+    for module in sorted((LIBRARY_ROOT / "agentlib").glob("*.py")):
+        _add_source(desired, module.relative_to(LIBRARY_ROOT).as_posix())
 
     for agent in agents:
         agent_path = agent.get("path", "")
@@ -118,7 +118,7 @@ def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int,
     desired[".agent-library/registry/skills.json"] = dump_json(skills)
     desired[".agent-library/registry/rules.json"] = dump_json(rules)
     
-    for f in ["registry/sources.lock.json", "registry/external-skills.json", "VERSION"]:
+    for f in ["registry/sources.lock.json", "registry/external-skills.json", "registry/workspace-skill-routing.json", "VERSION"]:
         _add_source(desired, f)
 
     config_relative = ".codex/config.toml"
@@ -151,11 +151,11 @@ def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int,
         begin_marker,
         "# Desenvolvimento com a biblioteca global",
         "Atue como orquestrador seguindo .agent-library/agents/orchestrator.md.",
-        "No inicio de cada sessao, leia BRAIN.md na raiz do projeto; recupere historico usando agentlib/memory.py quando necessario.",
+        "No inicio de cada sessao, leia BRAIN.md e PROJECT_PLAYBOOK.md na raiz do projeto; recupere historico usando agentlib/memory.py quando necessario.",
         "Registre decisoes, acoes comprovadas e checkpoint via memory.py. Em paralelo, somente o orquestrador escreve; especialistas retornam deltas.",
         "Leia .agent-library/profiles/active.json e PROJECT_CONTEXT.md do projeto quando existir.",
-        "Regras essenciais: .agent-library/rules/core/engineering.md, .agent-library/rules/core/quality.md e .agent-library/rules/execution/permissions.md.",
-        "Consulte .agent-library/registry para selecionar apenas skills e regras aplicaveis.",
+        "Regras essenciais: .agent-library/rules/core/engineering.md, .agent-library/rules/core/quality.md, .agent-library/rules/core/learning.md e .agent-library/rules/execution/permissions.md.",
+        "Consulte .agent-library/registry para selecionar apenas skills e regras aplicaveis. Complemente com skills realmente disponiveis em .agents/skills/*/SKILL.md ou no catalogo do runtime, lendo somente as pertinentes; skills do ambiente nao sao assumidas como portaveis.",
         "Delegue explicitamente partes independentes de tarefas complexas aos especialistas global-* disponiveis; sem ferramentas de subagentes, execute os papeis sequencialmente.",
         "Respeite instrucoes locais mais especificas, autorizacao do usuario e limites efetivos da sessao.",
         end_marker
@@ -216,6 +216,15 @@ def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int,
         if template_brain.is_file():
             desired["BRAIN.md"] = read_text(template_brain)
 
+    playbook_path = resolve_child(target, "PROJECT_PLAYBOOK.md")
+    assert_no_links(playbook_path)
+    if playbook_path.is_dir():
+        raise AgentLibError("PROJECT_PLAYBOOK.md e uma pasta.")
+    if not playbook_path.exists():
+        template_playbook = LIBRARY_ROOT / "templates/project-playbook.md"
+        if template_playbook.is_file():
+            desired["PROJECT_PLAYBOOK.md"] = read_text(template_playbook)
+
     desired["AGENTS.md"] = new_agents
     desired[".agent-library/manifest.json"] = dump_json(manifest)
 
@@ -236,17 +245,27 @@ def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int,
             originals[relative] = path.read_bytes() if path.is_file() else None
             path.parent.mkdir(parents=True, exist_ok=True)
             written.append(relative)
-            path.write_text(desired[relative], encoding="utf-8")
+            write_atomic(path, desired[relative])
     except Exception as failure:
         for relative in written:
             path = resolve_child(target, relative)
             if originals[relative] is not None:
-                path.write_bytes(originals[relative])
+                write_atomic(path, originals[relative])
             elif path.is_file():
                 path.unlink()
         raise failure
 
     return len(changed), f"Sincronizado: {target}; perfil={profile_name}; arquivos alterados={len(changed)}.\nAbra nova sessao no projeto para conferir descoberta. Configuracao preexistente foi preservada."
+
+
+def sync_project(project_path: str, profile_name: str = "general") -> Tuple[int, str]:
+    """Serializa instalações/sincronizações concorrentes no mesmo destino."""
+    target = Path(project_path).resolve()
+    if target.is_file():
+        raise AgentLibError("Destino e um arquivo.")
+    lock_path = resolve_child(target, ".agent-library/.sync.lock")
+    with FileLock(lock_path, stale_after=600.0, wait=10.0, purpose="sincronizacao"):
+        return _sync_project_unlocked(project_path, profile_name)
 
 if __name__ == "__main__":
     import sys

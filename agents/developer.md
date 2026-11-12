@@ -27,6 +27,7 @@ Antes de otimizar, obtenha baseline e use global-performance.
 Se ferramenta de plataforma estiver ausente, implemente o que puder verificar e relate o que exige emulador, dispositivo ou pacote específico.
 
 ## Skills e referências
+Consulte `registry/workspace-skill-routing.json` para skills do ambiente: `write-swift` em Swift, `animate-expo` em Expo, `mobile-native` em web mobile e `ask-sonner` apenas quando o projeto usar Sonner. Confirme disponibilidade e leia a skill antes de aplicar.
 Skills locais preferenciais: global-feature-delivery, global-debugging, global-testing. Carregue somente as pertinentes e disponíveis no perfil.
 Referências pesquisadas: superpowers, expo; links e condições em registry/external-skills.json. São candidatas, não skills já instaladas.
 

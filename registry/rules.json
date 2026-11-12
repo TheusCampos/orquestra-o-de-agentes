@@ -12,6 +12,12 @@
     "activation": "profile"
   },
   {
+    "id": "learning",
+    "path": "rules/core/learning.md",
+    "description": "Aprender com evidências e manter práticas locais revisáveis por projeto.",
+    "activation": "profile"
+  },
+  {
     "id": "permissions",
     "path": "rules/execution/permissions.md",
     "description": "Limites de execução e uso de ferramentas.",
@@ -36,6 +42,12 @@
     "activation": "profile"
   },
   {
+    "id": "operability",
+    "path": "rules/frameworks/operability.md",
+    "description": "Diagnóstico e recuperação de mudanças operacionais em serviços e releases.",
+    "activation": "profile"
+  },
+  {
     "id": "typescript",
     "path": "rules/languages/typescript.md",
     "description": "Regras condicionais para projetos TypeScript.",
@@ -46,5 +58,11 @@
     "path": "rules/languages/python.md",
     "description": "Regras condicionais para projetos Python.",
     "activation": "stack:python"
+  },
+  {
+    "id": "lgpd",
+    "path": "rules/compliance/lgpd.md",
+    "description": "Diretrizes e conformidade com a LGPD (Lei Geral de Proteção de Dados Pessoais).",
+    "activation": "profile"
   }
 ]

@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: agentlib-validate
+        name: Validate agent library
+        entry: python -B -m agentlib validate
+        language: system
+        pass_filenames: false
+
+      - id: agentlib-tests
+        name: Run agent library tests
+        entry: python -B -m unittest discover -s tests
+        language: system
+        pass_filenames: false

@@ -31,6 +31,7 @@ Respeite redução de movimento e evite animação que prejudique leitura ou int
 
 ## Skills e referências
 Skills locais preferenciais: global-web-interface, global-performance, global-testing. Carregue somente as pertinentes e disponíveis no perfil.
+Para skills do ambiente, consulte `registry/workspace-skill-routing.json`: use `image-to-code` para referência visual, `animate`/`animation-performance` para motion web, `mobile-native` para experiência no telefone e `break-ui` para dados extremos. Receba do Designer a direção e os estados; confirme qualquer contrato alterado antes de implementar.
 Referências pesquisadas: anthropic-design, vercel-react, anthropic-testing; links e condições em registry/external-skills.json. São candidatas, não skills já instaladas.
 
 ## Entregáveis e verificação

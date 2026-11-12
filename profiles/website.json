@@ -4,6 +4,9 @@
   "description": "Sites e interfaces web.",
   "agents": [
     "orchestrator",
+    "ceo",
+    "product-manager",
+    "designer",
     "frontend",
     "developer",
     "reviewer",
@@ -20,13 +23,17 @@
     "global-web-interface",
     "global-persistent-memory",
     "global-requirements",
-    "global-performance"
+    "global-performance",
+    "global-seo",
+    "global-lgpd-compliance"
   ],
   "rules": [
     "engineering",
     "quality",
+    "learning",
     "permissions",
-    "web"
+    "web",
+    "lgpd"
   ],
   "conditionalRules": [
     "typescript",

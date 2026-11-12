@@ -4,6 +4,8 @@
   "description": "Desenvolvimento geral e projetos ainda sem classificação.",
   "agents": [
     "orchestrator",
+    "ceo",
+    "product-manager",
     "developer",
     "reviewer",
     "qa"
@@ -17,12 +19,15 @@
     "global-feature-delivery",
     "global-library-maintenance",
     "global-persistent-memory",
-    "global-requirements"
+    "global-requirements",
+    "global-lgpd-compliance"
   ],
   "rules": [
     "engineering",
     "quality",
-    "permissions"
+    "learning",
+    "permissions",
+    "lgpd"
   ],
   "conditionalRules": [
     "typescript",

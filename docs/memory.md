@@ -1,14 +1,18 @@
 # Cérebro e memória persistente
 BRAIN.md é o ponto de recuperação de contexto de cada projeto. As seções curadas preservam objetivo, preferências, decisões e estado. O bloco automático mostra os últimos eventos.
-memory/events.jsonl é o histórico completo, com ID, data UTC, ator, tipo, confiança, evidência e substituição opcional.
-Não há dependência de serviço, embeddings ou banco de dados nesta versão. O arquivo acompanha o projeto; uma conversa só entra quando o agente a resume e registra.
+O histórico completo é persistido e sincronizado em três formatos integrados:
+- `memory/events.jsonl`: histórico linha a linha em streaming/append atômico.
+- `memory/events.json`: histórico completo em array JSON estruturado, indentado e legível.
+- `memory/memory.sqlite`: banco de dados relacional SQLite com índices otimizados para consultas SQL de alta performance (`kind`, `actor`, `supersedes`).
 
 ## Uso
-Na fonte execute scripts/memory.ps1; no projeto instalado execute .agent-library/scripts/memory.ps1.
+Na fonte execute a CLI Python; no projeto instalado execute o módulo distribuído em `.agent-library/agentlib`. PowerShell permanece como compatibilidade legada.
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\memory.ps1 -Action Read -ProjectPath .
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\memory.ps1 -Action Record -ProjectPath . -Kind decision -Actor orchestrator -Content "Usar a stack existente." -Confidence reported -Evidence "Pedido do usuário"
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\memory.ps1 -Action Read -ProjectPath . -Search "stack"
+python -m agentlib memory Read --project-path .
+python -m agentlib memory Record --project-path . --kind decision --actor orchestrator --content "Usar a stack existente." --confidence reported --evidence "Pedido do usuário"
+python -m agentlib memory Read --project-path . --search "stack"
+python -m agentlib memory Query --project-path . --query-sql "SELECT id, kind, actor, content FROM events ORDER BY timestampUtc DESC LIMIT 10"
+python -m agentlib memory Sync --project-path .
 ```
 Para checkpoint, registre tarefa, evidência, pendência e próximo passo. Para correção, use -Kind correction -Supersedes ID-do-evento.
 Um ID repetido com conteúdo idêntico é idempotente; conteúdo diferente com mesmo ID é rejeitado.

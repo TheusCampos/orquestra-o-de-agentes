@@ -1,7 +1,5 @@
 # quality
-Critérios de qualidade e conclusão.
+Critérios de conclusão.
 
-Done exige resultado solicitado e checks pertinentes. Informe comandos e limitações reais.
-Use build, lint, tipos e testes existentes conforme a mudança.
-Testes novos devem proteger comportamento ou risco significativo.
-Revise contratos afetados e integração entre subtarefas; checks isolados não substituem integração.
+Conclua apenas após verificar o resultado solicitado no fluxo afetado. Use checks existentes proporcionais ao risco e crie testes quando protegerem comportamento relevante.
+Confira contratos e integração entre subtarefas. Informe evidência, comandos executados e limites reais.
